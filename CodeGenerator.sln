@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{46521009-756F-42CD-B15C-A951FA65D991}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeGen", "CodeGen\CodeGen.csproj", "{0FD9BE51-B209-4684-81E5-902851A45A18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenTests", "CodeGenTests\CodeGenTests.csproj", "{4F777BF9-CF51-4FBD-B8CB-F29B0F554D3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46521009-756F-42CD-B15C-A951FA65D991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46521009-756F-42CD-B15C-A951FA65D991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46521009-756F-42CD-B15C-A951FA65D991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46521009-756F-42CD-B15C-A951FA65D991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FD9BE51-B209-4684-81E5-902851A45A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FD9BE51-B209-4684-81E5-902851A45A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FD9BE51-B209-4684-81E5-902851A45A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FD9BE51-B209-4684-81E5-902851A45A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F777BF9-CF51-4FBD-B8CB-F29B0F554D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F777BF9-CF51-4FBD-B8CB-F29B0F554D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F777BF9-CF51-4FBD-B8CB-F29B0F554D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F777BF9-CF51-4FBD-B8CB-F29B0F554D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0243983-E97A-4594-9C51-4E50C3EC51E7}
+	EndGlobalSection
+EndGlobal

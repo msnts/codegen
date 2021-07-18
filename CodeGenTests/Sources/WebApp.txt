@@ -1,0 +1,10 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+namespace WebApp
+{
+    class C
+    {
+        void M(IServiceCollection services)
+        {
+        }
+    }
+}

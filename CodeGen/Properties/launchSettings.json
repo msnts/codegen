@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CodeGen": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject":  "..\\WebApi\\WebApi.csproj"
+    }
+  }
+}

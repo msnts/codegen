@@ -1,0 +1,12 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace CodeGeneratorDemo.SourceGeneratorDemo.Extensions
+{
+    public static class AutoRegisterExtensions
+    {
+        public static void AutoRegister(this IServiceCollection services)
+        {
+            
+        }
+    }
+}

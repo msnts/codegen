@@ -1,0 +1,25 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+using CodeGen.Attributes;
+
+namespace WebApp
+{
+    class C
+    {
+        void M(IServiceCollection services)
+        {
+        }
+    }
+
+    interface IMyService
+    {
+    }
+
+    interface IMyService2
+    {
+    }
+
+    [AutoRegister]
+    class MyService : IMyService, IMyService2
+    {
+    }
+}
