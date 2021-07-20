@@ -12,8 +12,8 @@ namespace CodeGenTests
         }
 
         [Theory]
-        //[FileData("Sources\\WebApp.txt", "Sources\\ExpectedAttributeCode.txt", "Sources\\ExpectedExtensionCode.txt")]
-        [FileData("Sources\\WebAppFull.txt", "Sources\\ExpectedAttributeCode.txt", "Sources\\ExpectedExtensionCode.txt")]
+        [FileData("Sources\\WebApp.txt", "Sources\\ExpectedAttributeCode.txt", "Sources\\ExpectedExtensionCode.txt")]
+        [FileData("Sources\\FullWebApp.txt", "Sources\\ExpectedAttributeCode.txt", "Sources\\FullExpectedExtensionCode.txt")]
         public void GeneratedCodeWithoutServicesWork(string source, string expectedAttributeCode, string expectedExtensionCode)
         {
             var (attributeCode, extensionCode) = GetGeneratedOutput(source);

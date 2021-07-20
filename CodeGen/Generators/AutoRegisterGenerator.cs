@@ -3,9 +3,6 @@ using CodeGen.SyntaxReceivers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using Scriban;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace CodeGen.Generators
@@ -26,6 +23,21 @@ namespace CodeGen.Attributes
     }
 }";
 
+        private const string ExtensionHeader = @"using Microsoft.Extensions.DependencyInjection;
+
+namespace CodeGeneratorDemo.SourceGeneratorDemo.Extensions
+{
+    public static class AutoRegisterExtensions
+    {
+        public static void AutoRegister(this IServiceCollection services)
+        {
+";
+
+        private const string ExtensionFooter = @"        }
+    }
+}";
+        private const string spaces = "            ";
+
         public void Initialize(GeneratorInitializationContext context)
         {
             context.RegisterForPostInitialization(c => c.AddSource("Attributes.cs", SourceText.From(AttributeText, Encoding.UTF8)));
@@ -39,8 +51,8 @@ namespace CodeGen.Attributes
                 return;
             }
 
-            var services = new List<string>();
-            var namespaces = new List<string>();
+            var registrations = new StringBuilder(ExtensionHeader);
+
             CSharpParseOptions options = (context.Compilation as CSharpCompilation).SyntaxTrees[0].Options as CSharpParseOptions;
             SyntaxTree attributeSyntaxTree = CSharpSyntaxTree.ParseText(SourceText.From(AttributeText, Encoding.UTF8), options);
             Compilation compilation = context.Compilation.AddSyntaxTrees(attributeSyntaxTree);
@@ -50,44 +62,25 @@ namespace CodeGen.Attributes
             foreach (var candidateClass in receiver.CandidateClasses)
             {
                 SemanticModel model = compilation.GetSemanticModel(candidateClass.SyntaxTree);
-                if (model.GetDeclaredSymbol(candidateClass) is ITypeSymbol typeSymbol &&
-                    typeSymbol.GetAttributes().Any(x =>
-                        x.AttributeClass.Equals(attributeSymbol, SymbolEqualityComparer.Default)))
+                AttributeData attributeData;
+                if (model.GetDeclaredSymbol(candidateClass) is ITypeSymbol typeSymbol && typeSymbol.TryAttributeData(attributeSymbol, out attributeData))
                 {
-                    var ns = typeSymbol.GetFullNamespace();
-                    if (!string.IsNullOrEmpty(ns) && !namespaces.Contains(ns))
-                    {
-                        namespaces.Add(ns);
-                    }
-                    services.Add($"{candidateClass.Identifier.Text}");
+                    registrations.Append(spaces);
+                    registrations.AppendLine($"services.AddScoped<{typeSymbol.GetFullName()}>();");
 
                     foreach (var interf in typeSymbol.AllInterfaces)
                     {
+                        registrations.Append(spaces);
+                        registrations.AppendLine($"services.AddScoped<{interf.GetFullName()}, {typeSymbol.GetFullName()}>();");
                     }
                 }
             }
 
-            var template = GetAutoRegisterExtensionsTemplate();
-            var text = template.Render(new { Namespaces = namespaces, Services = services });
+            registrations.Append(ExtensionFooter);
 
-            context.AddSource("AutoRegisterExtensions.cs", SourceText.From(text, Encoding.UTF8));
-        }
+            var source = registrations.ToString();
 
-        private static Template GetAutoRegisterExtensionsTemplate()
-        {
-            return Template.Parse(@"using Microsoft.Extensions.DependencyInjection;
-{{ for namespace in namespaces }}using {{ namespace }};{{ end }}
-
-namespace CodeGeneratorDemo.SourceGeneratorDemo.Extensions
-{
-    public static class AutoRegisterExtensions
-    {
-        public static void AutoRegister(this IServiceCollection services)
-        {
-            {{ for service in services }}services.AddScoped<{{ service }}>();{{ end }}
-        }
-    }
-}");
+            context.AddSource("AutoRegisterExtensions.cs", SourceText.From(source, Encoding.UTF8));
         }
     }
 }

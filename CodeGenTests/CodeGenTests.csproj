@@ -30,10 +30,13 @@
     <None Update="Sources\ExpectedAttributeCode.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sources\FullExpectedExtensionCode.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sources\ExpectedExtensionCode.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sources\WebAppFull.txt">
+    <None Update="Sources\FullWebApp.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sources\WebApp.txt">

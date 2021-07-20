@@ -6,6 +6,9 @@ namespace CodeGeneratorDemo.SourceGeneratorDemo.Extensions
     {
         public static void AutoRegister(this IServiceCollection services)
         {
+            services.AddScoped<WebApp.MyService>();
+            services.AddScoped<WebApp.IMyService, WebApp.MyService>();
+            services.AddScoped<WebApp.IMyService2, WebApp.MyService>();
         }
     }
 }
